@@ -18,7 +18,7 @@ func (u *SQLiteUserRepository) Create(usr *models.User) error {
 	return u.db.Create(usr).Error
 }
 
-func (u *SQLiteUserRepository) FindAll() ([]models.User, error) {
+func (u *SQLiteUserRepository) List() ([]models.User, error) {
 	var usr []models.User
 
 	if err := u.db.Find(&usr).Error; err != nil {
@@ -33,6 +33,10 @@ func (u *SQLiteUserRepository) FindByID(id string) (*models.User, error) {
 		return nil, err
 	}
 	return &usr, nil
+}
+
+func (u *SQLiteUserRepository) Update(id string, user models.User) error {
+	return u.db.Model(&models.User{}).Where("id = ?", id).Updates(user).Error
 }
 
 func (u *SQLiteUserRepository) Delete(id string) error {
