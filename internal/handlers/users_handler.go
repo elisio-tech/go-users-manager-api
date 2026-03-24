@@ -19,3 +19,14 @@ func (u *UserHandler) GetUsers(ctx *gin.Context) {
 	}
 	ctx.JSON(200, users)
 }
+
+func (u *UserHandler) GetUserByID(ctx *gin.Context) {
+	id := ctx.Param("id")
+
+	users, err := u.service.GetUserByID(id)
+	if err != nil {
+		ctx.JSON(404, gin.H{"massage": err})
+		return
+	}
+	ctx.JSON(200, users)
+}
