@@ -34,3 +34,7 @@ func (u *SQLiteUserRepository) FindByID(id string) (*models.User, error) {
 	}
 	return &usr, nil
 }
+
+func (u *SQLiteUserRepository) Delete(id string) error {
+	return u.db.Delete(&models.User{}, "id = ?", id).Error
+}
