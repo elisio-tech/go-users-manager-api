@@ -30,3 +30,18 @@ func (u *UserHandler) GetUserByID(ctx *gin.Context) {
 	}
 	ctx.JSON(200, users)
 }
+
+func (u *UserHandler) DeleteBook(ctx *gin.Context) {
+	id := ctx.Param("id")
+
+	if id == "" {
+		ctx.JSON(400, gin.H{"error": "id is required"})
+		return
+	}
+
+	err := u.service.DeleteUser(id)
+	if err != nil {
+
+	}
+	ctx.JSON(200, gin.H{"message": "User deleted successfully"})
+}
